@@ -29,7 +29,7 @@
     group: '{{flannel_group}}'
     mode: '0755'
 
-- include: pki.yml
+- include_tasks: pki.yml
   when: flannel_secure
     
 - name: configurate flannel...
@@ -52,4 +52,4 @@
     group: '{{flannel_group}}'
     mode: '{{item.m|default("0644")}}'
 
-- include: '{{flannel_init_system|default("systemd")}}.yml'
+- include_tasks: '{{flannel_init_system|default("systemd")}}.yml'
