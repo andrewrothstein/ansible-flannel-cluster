@@ -14,15 +14,17 @@ galaxy_info:
         - 23
         - 24
         - 25
+        - 26
     - name: Ubuntu
       versions:
         - xenial
     - name: Debian
       versions:
         - jessie
+        - stretch
   galaxy_tags:
     - flannel 
 
 dependencies:
   - role: andrewrothstein.flannel 
-    version: v2.0.1
+    version: v2.1.1
