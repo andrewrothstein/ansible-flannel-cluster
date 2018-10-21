@@ -14,7 +14,7 @@
 - name: systemctl daemon-reload
   become: yes
   become_user: root
-  when: flannel_service_modified|changed and flannel_launch
+  when: flannel_service_modified is changed and flannel_launch
   command: systemctl daemon-reload
     
 - name: start flannel...
