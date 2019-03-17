@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Fouad Semaan 
+  author: Fouad Semaan
   description: configures a flannel cluster
   license:
     - MIT
@@ -23,8 +23,8 @@ galaxy_info:
         - jessie
         - stretch
   galaxy_tags:
-    - flannel 
+    - flannel
 
 dependencies:
-  - role: andrewrothstein.flannel 
-    version: v2.1.1
+  - role: andrewrothstein.flannel
+    version: v2.1.4

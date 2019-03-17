@@ -3,53 +3,53 @@
   become: yes
   become_user: root
   group:
-    name: '{{flannel_group}}'
+    name: '{{ flannel_group }}'
     state: present
-  
+
 - name: create flannel user
   become: yes
   become_user: root
   user:
-    name: '{{flannel_user}}'
-    group: '{{flannel_group}}'
-    home: '{{flannel_data_dir}}'
+    name: '{{ flannel_user }}'
+    group: '{{ flannel_group }}'
+    home: '{{ flannel_data_dir }}'
     state: present
 
 - name: create dirs...
   become: yes
   become_user: root
   with_items:
-    - '{{flannel_conf_dir}}'
-    - '{{flannel_cluster_pki_dir}}'
-    - '{{flannel_run_dir}}'
+    - '{{ flannel_conf_dir }}'
+    - '{{ flannel_cluster_pki_dir }}'
+    - '{{ flannel_run_dir }}'
   file:
     state: directory
-    path: '{{item}}'
-    owner: '{{flannel_user}}'
-    group: '{{flannel_group}}'
+    path: '{{ item }}'
+    owner: '{{ flannel_user }}'
+    group: '{{ flannel_group }}'
     mode: '0755'
 
 - include_tasks: pki.yml
   when: flannel_secure
-    
+
 - name: configurate flannel...
   become: yes
   become_user: root
   with_items:
     - f: options.env
-      d: '{{flannel_conf_dir}}'
+      d: '{{ flannel_conf_dir }}'
     - f: flanneld.sh
       d: /etc/profile.d
     - f: flannel-config.json
-      d: '{{flannel_conf_dir}}'
+      d: '{{ flannel_conf_dir }}'
     - f: flanneld-init-etcd.sh
       d: /usr/local/bin
       m: '0755'
   template:
-    src: '{{item.f}}.j2'
-    dest: '{{item.d}}/{{item.f}}'
-    owner: '{{flannel_user}}'
-    group: '{{flannel_group}}'
-    mode: '{{item.m|default("0644")}}'
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    owner: '{{ flannel_user }}'
+    group: '{{ flannel_group }}'
+    mode: '{{ item.m|default("0644") }}'
 
-- include_tasks: '{{flannel_init_system|default("systemd")}}.yml'
+- include_tasks: '{{ flannel_init_system|default("systemd") }}.yml'
