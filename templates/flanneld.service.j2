@@ -9,7 +9,7 @@ After=etcd.service
 
 [Service]
 Type=notify
-EnvironmentFile={{flannel_conf_dir}}/options.env
+EnvironmentFile={{ flannel_conf_dir }}/options.env
 
 {% if flannel_cidr is defined %}
 ExecStartPre=-/usr/local/bin/flanneld-init-etcd.sh
